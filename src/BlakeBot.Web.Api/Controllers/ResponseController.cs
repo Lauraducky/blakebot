@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http;
+using BlakeBot.Web.Api.Services;
 
 namespace BlakeBot.Web.Api.Controllers
 {
@@ -11,6 +12,12 @@ namespace BlakeBot.Web.Api.Controllers
     [ApiController]
     public class ResponseController : ControllerBase
     {
+        private readonly IPhraseMuddler _phraseMuddler;
+
+        public ResponseController(IPhraseMuddler phraseMuddler) {
+            _phraseMuddler = phraseMuddler;
+        }
+
         // GET api/response/room
         [HttpGet("room")]
         public ActionResult<string> Get()
