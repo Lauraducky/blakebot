@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http;
 using BlakeBot.Web.Api.Services;
 
 namespace BlakeBot.Web.Api.Controllers
@@ -30,6 +29,13 @@ namespace BlakeBot.Web.Api.Controllers
         public ActionResult<string> Get(int id)
         {
             return "direct";
+        }
+
+        // GET api/response/muddle/{word}
+        [HttpGet("muddle/{phrase}")]
+        public ActionResult<string> Get(string phrase)
+        {
+            return _phraseMuddler.MuddlePhrase(phrase);
         }
     }
 }

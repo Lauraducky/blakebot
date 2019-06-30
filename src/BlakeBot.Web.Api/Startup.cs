@@ -11,14 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using BlakeBot.Web.Api.Services;
 
 namespace BlakeBot.Web.Api
 {
     public class Startup
     {
-        public IContainer Container;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,16 +26,19 @@ namespace BlakeBot.Web.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var builder = new ContainerBuilder();
 
+            builder.Populate(services);
+
             builder.RegisterType<PhraseMuddler>().AsImplementedInterfaces();
             builder.RegisterType<WordMuddler>().AsImplementedInterfaces();
 
-            Container = builder.Build();
+            var container = builder.Build();
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
