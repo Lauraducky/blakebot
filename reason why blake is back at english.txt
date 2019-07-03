@@ -1,0 +1,17 @@
+word muddling (done)
+	switching 2 letters that are adjacent in a word
+	maybe needs less weight for first / last letters of words
+fat finger
+	1 adjacent letter pressed in addition to the inteded character
+phonetic spelling
+	dictionary replacement with phonetic spelled word
+	phonetic spelling based on mispronunciation word
+bad spaces
+	take the last letter of previous word and add it to the start of the next word
+bad vocabulary
+	swaps words for other, very similar, dictionary words
+	have one that always runs that replaces you're with your and their and they're with there
+punctuation
+	Randomly remove capitalisation and/or punctuation.
+"phone" punctuation
+	a "phone" random chance, if phone it will have capitals, if not it wont have any.
