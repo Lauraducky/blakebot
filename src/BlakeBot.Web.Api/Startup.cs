@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using BlakeBot.Web.Api.Configuration;
+using BlakeBot.Web.Api.Services;
+using GlobalX.ChatBots.WebexTeams;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using BlakeBot.Web.Api.Services;
 
 namespace BlakeBot.Web.Api
 {
@@ -29,6 +25,8 @@ namespace BlakeBot.Web.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.ConfigureWebexTeamsBot(Configuration);
+            services.Configure<BotSettings>(Configuration);
 
             var builder = new ContainerBuilder();
 
@@ -56,6 +54,7 @@ namespace BlakeBot.Web.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.ApplicationServices.GetService<IWebhookHelper>().Webhooks.RegisterWebhooksAsync();
         }
     }
 }
