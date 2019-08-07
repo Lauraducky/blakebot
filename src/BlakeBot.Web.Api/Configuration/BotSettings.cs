@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BlakeBot.Web.Api.Configuration
+﻿namespace BlakeBot.Web.Api.Configuration
 {
     public class BotSettings
     {
