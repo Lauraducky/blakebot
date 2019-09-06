@@ -24,7 +24,7 @@ namespace BlakeBot.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.ConfigureWebexTeamsBot(Configuration);
             services.Configure<BotSettings>(Configuration);
 
