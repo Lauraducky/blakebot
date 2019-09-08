@@ -68,6 +68,11 @@ namespace BlakeBot.Web.Api.Controllers
             }
 
             var message = await _webhookHelper.Webhooks.ProcessMessageWebhookCallbackAsync(rawData);
+            if (message.SenderId == _settings.BotId)
+            {
+                return "OK";
+            }
+
             var muddled = _phraseMuddler.MuddlePhrase(message.Text);
             await _chatHelper.Messages.SendMessageAsync(new Message
             {

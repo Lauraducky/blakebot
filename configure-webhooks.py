@@ -51,7 +51,7 @@ direct_body = {
     'targetUrl': args.directurl,
     'resource': 'messages',
     'event': 'created',
-    'filter': 'mentionedPeople=me'
+    'filter': 'roomType=direct'
 }
 
 requests.post(
