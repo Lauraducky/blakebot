@@ -14,8 +14,8 @@ namespace BlakeBot.Web.Api.Services {
             var arr = input.ToCharArray();
 
             for (int i = 0; i < arr.Length - 1; i++) {
-                var num = _randomiser.Next(100);
-                if (num > Threshold) {
+                if (!char.IsPunctuation(arr[i]) && !char.IsPunctuation(arr[i + 1])
+						&& _randomiser.Next(100) > Threshold) {
                     // swap letters
                     char a = arr[i];
                     arr[i] = arr[i + 1];
