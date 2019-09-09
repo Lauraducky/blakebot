@@ -36,6 +36,7 @@ namespace BlakeBot.Web.Api
             builder.RegisterType<WordMuddler>().AsImplementedInterfaces();
 			builder.RegisterType<CapitalisationRemover>().AsImplementedInterfaces();
 			builder.RegisterType<Randomiser>().AsImplementedInterfaces().SingleInstance();
+			builder.RegisterType<PunctuationRemover>().AsImplementedInterfaces();
 
             var container = builder.Build();
             return new AutofacServiceProvider(container);
