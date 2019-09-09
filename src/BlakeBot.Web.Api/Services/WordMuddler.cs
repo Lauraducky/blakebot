@@ -4,12 +4,17 @@ namespace BlakeBot.Web.Api.Services {
     public class WordMuddler : IWordMuddler {
         private const int Threshold = 75;
 
+		private readonly IRandomiser _randomiser;
+
+		public WordMuddler(IRandomiser randomiser) {
+			_randomiser = randomiser;
+		}
+
         public string MuddleWord(string input) {
             var arr = input.ToCharArray();
 
-            var rand = new Random();
             for (int i = 0; i < arr.Length - 1; i++) {
-                var num = rand.Next(100);
+                var num = _randomiser.Next(100);
                 if (num > Threshold) {
                     // swap letters
                     char a = arr[i];
