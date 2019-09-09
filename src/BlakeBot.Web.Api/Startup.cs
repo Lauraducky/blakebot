@@ -54,7 +54,6 @@ namespace BlakeBot.Web.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.ApplicationServices.GetService<IWebhookHelper>().Webhooks.RegisterWebhooksAsync();
         }
     }
 }
