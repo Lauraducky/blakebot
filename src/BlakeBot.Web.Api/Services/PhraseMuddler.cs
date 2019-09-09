@@ -14,11 +14,13 @@ namespace BlakeBot.Web.Api.Services {
         public string MuddlePhrase(string input) {
             string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            var muddled = words.Select(x => _wordMuddler.MuddleWord(x));
+            var muddledWords = words.Select(x => {
+				var muddled = _wordMuddler.MuddleWord(x);
+				var lowercased = _capitalisationRemover.RemoveCapitalisation(muddled);
+				return lowercased;
+			});
 
-            var full = string.Join(' ', muddled);
-			var lowercase = _capitalisationRemover.RemoveCapitalisation(full);
-			return lowercase;
+            return string.Join(' ', muddledWords);
         }
     }
 }
