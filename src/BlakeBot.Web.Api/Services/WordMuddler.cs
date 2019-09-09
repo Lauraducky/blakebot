@@ -3,7 +3,7 @@ using System;
 namespace BlakeBot.Web.Api.Services {
     public class WordMuddler : IWordMuddler {
         private const int Threshold = 75;
-        
+
         public string MuddleWord(string input) {
             var arr = input.ToCharArray();
 

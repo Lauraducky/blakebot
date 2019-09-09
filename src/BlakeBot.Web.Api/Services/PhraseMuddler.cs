@@ -4,9 +4,11 @@ using System.Linq;
 namespace BlakeBot.Web.Api.Services {
     public class PhraseMuddler : IPhraseMuddler {
         private readonly IWordMuddler _wordMuddler;
+		private readonly ICapitalisationRemover _capitalisationRemover;
 
-        public PhraseMuddler(IWordMuddler wordMuddler) {
+        public PhraseMuddler(IWordMuddler wordMuddler, ICapitalisationRemover capitalisationRemover) {
             _wordMuddler = wordMuddler;
+			_capitalisationRemover = capitalisationRemover;
         }
 
         public string MuddlePhrase(string input) {
@@ -14,7 +16,9 @@ namespace BlakeBot.Web.Api.Services {
 
             var muddled = words.Select(x => _wordMuddler.MuddleWord(x));
 
-            return string.Join(' ', muddled);
+            var full = string.Join(' ', muddled);
+			var lowercase = _capitalisationRemover.RemoveCapitalisation(full);
+			return lowercase;
         }
     }
 }
