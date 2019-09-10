@@ -17,7 +17,7 @@ namespace BlakeBot.Web.Api.Services
 
 			for (int i = 0; i < arr.Length - 1; i++)
 			{
-				if (!char.IsPunctuation(arr[i]) && !char.IsPunctuation(arr[i + 1])
+				if (char.IsLetterOrDigit(arr[i]) && char.IsLetterOrDigit(arr[i + 1])
 						&& _randomiser.Next(100) > Threshold)
 				{
 					// swap letters

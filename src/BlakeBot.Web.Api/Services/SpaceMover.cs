@@ -23,13 +23,14 @@ namespace BlakeBot.Web.Api.Services
 			{
 				if (_randomiser.Next(100) > Threshold)
 				{
-					if (currentIndex > 0 && _randomiser.Next(100) < 50)
+					if ((char.IsLetterOrDigit(arr[currentIndex - 1]) || char.IsPunctuation(arr[currentIndex - 1]))
+					    && currentIndex > 0 && _randomiser.Next(100) < 50)
 					{
 						char a = arr[currentIndex];
 						arr[currentIndex] = arr[currentIndex - 1];
 						arr[currentIndex - 1] = a;
 					}
-					else
+					else if (char.IsLetterOrDigit(arr[currentIndex + 1]) || char.IsPunctuation(arr[currentIndex + 1]))
 					{
 						char a = arr[currentIndex];
 						arr[currentIndex] = arr[currentIndex + 1];
