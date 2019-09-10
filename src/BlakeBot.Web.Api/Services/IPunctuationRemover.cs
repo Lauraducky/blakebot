@@ -1,5 +1,7 @@
-namespace BlakeBot.Web.Api.Services {
-	public interface IPunctuationRemover {
+namespace BlakeBot.Web.Api.Services
+{
+	public interface IPunctuationRemover
+	{
 		string RemovePunctuation(string input);
 	}
 }

@@ -1,8 +1,8 @@
-﻿namespace BlakeBot.Web.Api.Configuration
+namespace BlakeBot.Web.Api.Configuration
 {
-    public class BotSettings
-    {
-        public string BotName { get; set; }
-        public string BotId { get; set; }
-    }
+	public class BotSettings
+	{
+		public string BotName { get; set; }
+		public string BotId { get; set; }
+	}
 }
