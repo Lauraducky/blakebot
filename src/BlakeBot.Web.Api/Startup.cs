@@ -27,6 +27,7 @@ namespace BlakeBot.Web.Api
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			services.ConfigureWebexTeamsBot(Configuration);
 			services.Configure<BotSettings>(Configuration);
+			services.Configure<Thresholds>(Configuration);
 
 			var builder = new ContainerBuilder();
 

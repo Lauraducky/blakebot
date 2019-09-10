@@ -23,7 +23,7 @@ namespace BlakeBot.Web.Api.Services
 
 		public string MuddlePhrase(string input)
 		{
-			string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+			var words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
 			var muddledWords = words.Select(x =>
 			{
