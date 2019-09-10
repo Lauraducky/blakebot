@@ -6,14 +6,17 @@ namespace BlakeBot.Web.Api.Services {
         private readonly IWordMuddler _wordMuddler;
 		private readonly ICapitalisationRemover _capitalisationRemover;
 		private readonly IPunctuationRemover _punctuationRemover;
+		private readonly ISpaceMover _spaceMover;
 
         public PhraseMuddler(IWordMuddler wordMuddler,
 			ICapitalisationRemover capitalisationRemover,
-			IPunctuationRemover punctuationRemover)
+			IPunctuationRemover punctuationRemover,
+			ISpaceMover spaceMover)
 		{
             _wordMuddler = wordMuddler;
 			_capitalisationRemover = capitalisationRemover;
 			_punctuationRemover = punctuationRemover;
+			_spaceMover = spaceMover;
         }
 
         public string MuddlePhrase(string input) {
@@ -27,7 +30,8 @@ namespace BlakeBot.Web.Api.Services {
 
             var full = string.Join(' ', muddledWords);
 			var punctuationRemoved = _punctuationRemover.RemovePunctuation(full);
-			return punctuationRemoved;
+			var spacesMoved = _spaceMover.MoveSpaces(punctuationRemoved);
+			return spacesMoved;
         }
     }
 }
