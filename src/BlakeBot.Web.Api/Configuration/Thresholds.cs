@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace BlakeBot.Web.Api.Configuration
 {
 	public class Thresholds
 	{
+		public int ChanceToSwapFirstAndLastCharacters { get; set; }
 		public int ChanceToSwapCharacters { get; set; }
 		public int ChanceToRemoveCapitals { get; set; }
 		public int ChanceToMoveSpaces { get; set; }

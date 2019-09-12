@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Text.RegularExpressions;
 using BlakeBot.Web.Api.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -16,12 +18,26 @@ namespace BlakeBot.Web.Api.Services
 
 		public string MuddleWord(string input)
 		{
-			var arr = input.ToCharArray();
+			if (input.All(char.IsPunctuation))
+			{
+				return input;
+			}
+
+			var noPrecedingPunctuation = Regex.Replace(input, $"^[^a-zA-Z]*", string.Empty);
+			var precedingPunctuation = input.Substring(0, input.Length - noPrecedingPunctuation.Length);
+			var noTrailingPunctuation = Regex.Replace(noPrecedingPunctuation, $"[^a-zA-Z]*$", string.Empty);
+			var trailingPunctuation = noPrecedingPunctuation.Substring(noTrailingPunctuation.Length);
+
+			var arr = noTrailingPunctuation.ToCharArray();
 
 			for (var i = 0; i < arr.Length - 1; i++)
 			{
+				var chance = i == 0 || i == arr.Length - 2
+					? _thresholds.ChanceToSwapFirstAndLastCharacters
+					: _thresholds.ChanceToSwapCharacters;
+
 				if (char.IsLetterOrDigit(arr[i]) && char.IsLetterOrDigit(arr[i + 1])
-						&& _randomiser.Next(100) <= _thresholds.ChanceToSwapCharacters)
+						&& _randomiser.Next(100) <= chance)
 				{
 					// swap letters
 					var a = arr[i];
@@ -31,7 +47,7 @@ namespace BlakeBot.Web.Api.Services
 				}
 			}
 
-			return new string(arr);
+			return precedingPunctuation + new string(arr) + trailingPunctuation;
 		}
 	}
 }
